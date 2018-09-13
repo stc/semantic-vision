@@ -11,4 +11,5 @@ Each example includes media files where needed. The 'libs' folder contains the n
 
 ### Inspiration
 [Human Pose and motion](https://github.com/daitomanabe/Human-Pose-and-Motion): an extensive overview of the topic in media history, by Daito Manabe
+
 [Open Source Machine learning Projects](https://medium.mybridge.co/30-amazing-machine-learning-projects-for-the-past-year-v-2018-b853b8621ac7): what people are doing with ML in 2018
