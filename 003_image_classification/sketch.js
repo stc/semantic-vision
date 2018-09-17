@@ -18,7 +18,7 @@ let img;
 function setup() {
   noCanvas();
   // Load the image
-  img = createImg('images/bird.jpg', imageReady);
+  img = createImg('images/carcio.jpg', imageReady);
   img.size(400, 400);
 }
 

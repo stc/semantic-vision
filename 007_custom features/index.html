@@ -1,0 +1,54 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  
+  <script src="../libs/p5.js"></script>
+  <script src="../libs/p5.dom.js"></script>
+  <script src="../libs/p5.sound.js"></script>
+  <script src="../libs/ml5.min.js" type="text/javascript"></script>  
+  <style>
+  
+  button {
+    margin: 2px;
+    padding: 4px;
+  }
+  video{
+    width: 300;
+    height: 300;
+  }
+  p{
+    display: inline;
+    font-size: 14px;
+  }
+  h6{
+    margin: 4px;
+    font-weight: lighter;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="videoContainer"></div>
+  <h6><span id="modelStatus">Loading base model...</span> | <span id="videoStatus">Loading video...</span></h6>
+  <p>
+    <button id="button1">Add Class 1</button>
+    <p><span id="amountOfClass1">0</span> Examples for Class 1</p>
+    <br><button id="button2">Add Class 2</button>
+    <p><span id="amountOfClass2">0</span> Examples for Class 2</p>
+    <br><button id="button3">Add Class 3</button>
+    <p><span id="amountOfClass3">0</span> Examples for Class 3</p>
+  </p>
+  <br/>
+  <p><button id="train">Train</button><span id="loss"></span></p>
+  <br/>
+  <p>
+    <button id="buttonPredict">Start guessing!</button><br>
+    Your custom model labeled this as: <span id="result">...</span>
+  </p>
+  <script src="sketch.js"></script>
+</body>
+
+</html>
