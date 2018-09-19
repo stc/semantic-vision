@@ -4,10 +4,24 @@ let video;
 let loss;
 let slider;
 let samples = 0;
-let positionX = 140;
+
+let position = 0;
+let images = []; 
+let img1, img2;
+let perform = false;
+
+function preload() {
+  img1 = loadImage('data/camera.jpg');
+  img2 = loadImage('data/full-snapshot.jpg');
+
+  for(let i=0; i<12; i++) {
+    images[i] = loadImage('data/' + i + '.jpg');
+  }
+}
 
 function setup() {
-  createCanvas(340, 280);
+  let c = createCanvas(displayWidth, displayHeight);
+  c.position(0,0);
   video = createCapture(VIDEO);
   video.hide();
   featureExtractor = ml5.featureExtractor('MobileNet', modelReady);
@@ -16,10 +30,16 @@ function setup() {
 }
 
 function draw() {
-  image(video, 0, 0, 340, 280);
+  clear();
+  image(video, 20, 50, 340, 260);
   noStroke();
-  fill(255, 0, 0);
-  rect(positionX, 120, 50, 50);
+
+  if(!perform) {
+    image(img1, 400, 50, 500, 228);
+    image(img2, 400, 278, 500, 138);
+  } else {
+    image(images[position], 400, 50, 400, 350);
+  }
 }
 
 function modelReady() {
@@ -57,10 +77,11 @@ function setupButtons() {
 
 // Show the results
 function gotResults(err, result) {
+  perform = true;
   if (err) {
     console.error(err);
   }
-  positionX = map(result, 0, 1, 0, width);
+  position = floor(map(result, 0, 1, 0, 12));
   slider.value(result);
   predict();
 }
