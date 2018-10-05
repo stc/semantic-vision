@@ -1,78 +1,63 @@
-var player;
-var wall1, wall2, wall3;
+var playerx = 0;
+var w1, w2, w3;
+var gameover = false;
+var gameoversound;
+var controller = 0;
 
 function setup() {
-  createCanvas(1000,600);
-  player = new Player();
-  makeWalls();
+    createCanvas(640,480);
+    w1 = random(100,150);
+    w2 = random(200, 300);
+    w3 = random(350,450);
+    gameoversound = loadSound("data/hang.wav");
 }
 
 function draw() {
-  background(0);
-  player.draw();
-
-  wall1.draw();
-  wall2.draw();
-  wall3.draw();
-
-  if(wall1.over(player.x, player.y) || wall2.over(player.x, player.y) || wall3.over(player.x, player.y)) {
-    textSize(50);
-    textAlign(CENTER,CENTER);
+    background(0);
+    
     fill(255);
-    noStroke();
-    text("GAME OVER", width/2, height/2);
-    noLoop(); 
-  }
-}
-
-function makeWalls() {
-  var wallWidth = 30;
-  wall1 = new Wall( random(wallWidth,width/4), 0, wallWidth, random( 100, height - 100) );
-  var randomHeight = random( 100, height - 100);
-  wall2 = new Wall( random(width/3,width/2 + width/4), height - randomHeight, wallWidth, randomHeight );
-  wall3 = new Wall( random(width/2+width/4,width-wallWidth), 0, wallWidth, random( 100, height - 100) );
-}
-
-class Player {
-  constructor() {
-    this.x = 0;
-    this.y = height/2;
-    this.size = 20;
-    this.speed = 4;
-  }
-
-  draw() {
-    noStroke();
-    fill(255);
-    ellipse(this.x, this.y, this.size, this.size);
-    this.x += this.speed;
-    this.y = mouseY;
-    if(this.x > width) {
-      makeWalls();
-      this.x = 0;
+    rect(playerx, controller, 50, 50);
+    
+    playerx++;
+    if(playerx > width) {
+        playerx = 0;
     }
-  }
+    
+    Wall(w1, 50, 50, 100);
+    Wall(w2, 100, 50, 150);
+    Wall(w3, 100, 50, 150);
+    
+    if(gameover) {
+        noStroke();
+        fill(0, 200);
+        rect(0,0,width,height);
+        textSize(60);
+        fill(255,0,0);
+        textAlign(CENTER,CENTER);
+        text("GAME OVER", width/2,height/2);
+    }
+
+    controller = mouseY;
 }
 
-class Wall {
-  constructor(x,y,w,h) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-  }
-
-  draw() {
+function Wall(x,y,w,h) {
+    var wallx = x;
+    var wally = y;
+    var wallw = w;
+    var wallh = h;
+    
     noFill();
     stroke(255);
-    rect(this.x, this.y, this.w, this.h);
-  }
-
-  over(x,y) {
-    if((x > this.x && x < this.x + this.w) && (y > this.y && y < this.y + this.h)) {
-      return true;
-    } else {
-      return false;
+    rect(wallx, wally, wallw, wallh);
+    
+    if(playerx + 50 > wallx && 
+       controller + 50 > wally && 
+        playerx < wallx + wallw &&
+       controller < wally + wallh
+      ) {
+        //playerx = 0;
+        gameoversound.play();
+        gameover = true;
+        noLoop();
     }
-  }
 }

@@ -57,8 +57,8 @@ function draw() {
   rotationPhase = frameCount * 0.001;
   wavePhase = frameCount * 0.002;
 
-  let target = mouseX / width;
-  //let target = res;
+  //let target = mouseX / width;
+  let target = res;
   let d = target - c;
   c += d * easing;
   changer = c;
