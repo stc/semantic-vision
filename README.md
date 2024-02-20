@@ -2,7 +2,7 @@
 ## Overview
 Introduction to creative coding and computer vision using modern web based technologies. Computer vision is with us since many years. Reading and tracking light, pixels, blobs, edges, colors are common techniques in interactive environments. However, the field is just shifting to next level states with successful learning systems (machine learning and deep neural networks) recently. Semantic content became available to deal with, thanks for the extended databases and training algorithms out there. Our machines now understand drawings, objects, human poses, gestures, and many other semantically meaningful components, that are related to vision. This workshop covers some basic methods on how to use these advances, also, it is intended to find novel ways of cognitive interaction modalities based on these tools. 
 
-## tools
+## Tools
 
 We are using the free and open source [p5js](https://p5js.org/) library to create shapes and forms on the canvas, in Javascript language. The simplest way to get started is to use the excellent [online p5 editor](https://editor.p5js.org/), however if you plan to bring your pieces offline and continue working on them in a more elaborative way, it is useful to [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) and use the open source, cross platform editor [VSCodium](https://vscodium.com/) with your projects. 
 
