@@ -28,7 +28,7 @@ We are using the free and open source [p5js](https://p5js.org/) library to creat
 
 006 - [pixel regression](https://stc.github.io/semantic-vision/006_pixel_regression/)
 
-007 - [augmented reality + image tracking](https://stc.github.io/semantic-vision/007_augmented_reality_image_tracking/custom-image.html) - open this on your phone, then show [this image](https://github.com/stc/semantic-vision/blob/master/007_augmented_reality_image_tracking/assets/marker.jpg) to your device
+007 - [augmented reality + image tracking](https://stc.github.io/semantic-vision/007_augmented_reality_image_tracking/custom-image.html) - open this on your phone, then show [this image](https://stc.github.io/semanitc-vision/007_augmented_reality_image_tracking/assets/marker.jpg) to your device
 
 ## Inspiration
 [Human Pose and motion](https://github.com/daitomanabe/Human-Pose-and-Motion): an extensive overview of the topic in media history, by Daito Manabe
