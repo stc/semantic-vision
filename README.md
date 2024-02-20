@@ -9,6 +9,22 @@ Introduction to creative coding and computer vision using modern web based techn
 
 007 - using mindAR (on top of A-Frame) as the computer vision engine and displays content in mixed reality
 
+### Examples
+
+001 - [color tracking](https://stc.github.io/semantic-vision/001_color_tracking/)
+
+002 - [object detection](https://stc.github.io/semantic-vision/002_object_detection/)
+
+003 - [posenet](https://stc.github.io/semantic-vision/003_posenet/)
+
+004 - [hand pose](https://stc.github.io/semantic-vision/004_handpose/)
+
+005 - [feature extraction](https://stc.github.io/semantic-vision/005_feature_extraction/)
+
+006 - [pixel regression](https://stc.github.io/semantic-vision/006_pixel_regression/)
+
+007 - [augmented reality + image tracking](https://stc.github.io/semantic-vision/007_augmented_reality_image_tracking/custom-image.html)
+
 ### Inspiration
 [Human Pose and motion](https://github.com/daitomanabe/Human-Pose-and-Motion): an extensive overview of the topic in media history, by Daito Manabe
 
