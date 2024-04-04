@@ -14,11 +14,12 @@
   <script type="module">
     import * as THREE from 'three';
     import { MindARThree } from 'mindar-image-three';
-
+    
     // load video here
     let video01 = document.getElementById('video01');
     video01.play();
     const videoTexture01 = new THREE.VideoTexture(video01);
+    videoTexture01.format = THREE.RGBAFormat;
 
     // create a mindar object using threejs
     const mindarThree = new MindARThree({
@@ -30,7 +31,7 @@
     const { renderer, scene, camera } = mindarThree;
     const anchor = mindarThree.addAnchor(0);
     const geometry = new THREE.PlaneGeometry(1, 0.55);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ffff, transparent: true, opacity: 0.5, map: videoTexture01 });
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ffff, transparent: true, opacity: 1.0, map: videoTexture01 });
     const plane = new THREE.Mesh(geometry, material);
     anchor.group.add(plane);
     const start = async () => {
@@ -71,7 +72,7 @@
 
 <body>
   <video id="video01" loop crossOrigin="anonymous" playsinline style="display:none">
-    <source src="./assets/earth.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    <source src="./assets/infinity-transparent.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
   <div id="control">
     <button id="startButton">Start</button>
