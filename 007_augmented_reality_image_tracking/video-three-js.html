@@ -29,9 +29,17 @@
 
     // setup the scene in threejs
     const { renderer, scene, camera } = mindarThree;
-    const anchor = mindarThree.addAnchor(0);
+    let anchor = mindarThree.addAnchor(0);
+    anchor.onTargetFound = function() {
+      console.log("found");
+      document.getElementById("video01").muted = false;
+    }
+    anchor.onTargetLost = function() {
+      console.log("lost");
+      document.getElementById("video01").muted = true;
+    }
     const geometry = new THREE.PlaneGeometry(1, 0.55);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ffff, transparent: true, opacity: 1.0, map: videoTexture01 });
+    const material = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture01 });
     const plane = new THREE.Mesh(geometry, material);
     anchor.group.add(plane);
     const start = async () => {
@@ -43,6 +51,8 @@
     const startButton = document.querySelector("#startButton");
     startButton.addEventListener("click", () => {
       start();
+      document.getElementById("video01").play();
+
     });
     stopButton.addEventListener("click", () => {
       mindarThree.stop();
@@ -72,7 +82,7 @@
 
 <body>
   <video id="video01" loop crossOrigin="anonymous" playsinline style="display:none">
-    <source src="./assets/vid-0.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    <source src="./assets/bird.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
   <div id="control">
     <button id="startButton">Start</button>
