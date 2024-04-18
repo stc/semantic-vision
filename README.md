@@ -30,6 +30,10 @@ We are using the free and open source [p5js](https://p5js.org/) library to creat
 
 007 - [augmented reality + image tracking](https://stc.github.io/semantic-vision/007_augmented_reality_image_tracking/custom-image.html) - open this on your phone, then show [this image](https://stc.github.io/semantic-vision/007_augmented_reality_image_tracking/assets/marker.jpg) to your device. [Multiple videos example](https://stc.github.io/semantic-vision/007_augmented_reality_image_tracking/video-many.html)
 
+## Class Works
+
+[Tarot Card Divination](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/index.html) (Boszorkány Project). Show [this image](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/marker.png) to your phone
+
 ## Inspiration
 [Human Pose and motion](https://github.com/daitomanabe/Human-Pose-and-Motion): an extensive overview of the topic in media history, by Daito Manabe
 

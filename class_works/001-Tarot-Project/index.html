@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: ./targets.mind;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <img id="card" />
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane
+          src="#card"
+          position="0 0 0"
+          transparent="true"
+          height="2"
+          width="1"
+          rotation="0 0 0"
+        ></a-plane>
+      </a-entity>
+    </a-scene>
+    <script>
+      const imageArray = [
+        "./assets/1.png",
+        "./assets/2.png",
+        "./assets/3.png",
+        "./assets/4.png",
+        "./assets/5.png",
+        "./assets/6.png",
+        "./assets/7.png",
+        "./assets/8.png",
+        "./assets/9.png",
+        "./assets/10.png",
+        "./assets/11.png",
+        "./assets/12.png",
+        "./assets/13.png",
+        "./assets/14.png",
+        "./assets/15.png",
+        "./assets/16.png",
+        "./assets/17.png",
+        "./assets/18.png",
+        "./assets/19.png",
+        "./assets/20.png",
+        "./assets/21.png",
+        "./assets/22.png",
+        "./assets/23.png",
+        "./assets/24.png",
+        "./assets/25.png",
+        "./assets/26.png",
+        "./assets/27.png",
+        "./assets/28.png",
+        "./assets/29.png",
+        "./assets/30.png",
+        "./assets/31.png",
+        "./assets/32.png",
+        "./assets/33.png",
+        "./assets/34.png",
+        "./assets/35.png",
+        "./assets/36.png",
+        "./assets/37.png",
+        "./assets/38.png",
+        "./assets/39.png",
+        "./assets/40.png",
+        "./assets/41.png",
+        "./assets/42.png",
+        "./assets/43.png",
+        "./assets/44.png",
+        "./assets/45.png",
+        "./assets/46.png",
+        "./assets/47.png",
+        "./assets/48.png",
+        "./assets/49.png",
+        "./assets/50.png",
+        "./assets/51.png",
+        "./assets/52.png",
+        "./assets/53.png",
+        "./assets/54.png",
+        "./assets/55.png",
+        "./assets/56.png",
+        "./assets/57.png",
+        "./assets/58.png",
+        "./assets/59.png",
+        "./assets/60.png",
+        "./assets/61.png",
+        "./assets/62.png",
+        "./assets/63.png",
+        "./assets/64.png",
+        "./assets/65.png",
+        "./assets/66.png",
+        "./assets/67.png",
+        "./assets/68.png",
+        "./assets/69.png",
+        "./assets/70.png",
+        "./assets/71.png",
+        "./assets/72.png",
+        "./assets/73.png",
+        "./assets/74.png",
+        "./assets/75.png",
+        "./assets/76.png",
+        "./assets/77.png",
+        "./assets/78.png",
+      ];
+      function randomCard() {
+        const randomImg = Math.floor(Math.random() * imageArray.length);
+        document.getElementById("card").src = imageArray[randomImg];
+      }
+      randomCard();
+    </script>
+  </body>
+</html>
