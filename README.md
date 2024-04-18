@@ -32,7 +32,7 @@ We are using the free and open source [p5js](https://p5js.org/) library to creat
 
 ## Class Works
 
-[Tarot Card Divination](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/index.html) (Boszorkány Project). Show [this image](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/marker.png) to your phone
+[Tarot Card Divination](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/index.html) (Boszorkány Project). After opening the previous link on your phone, show [this image](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/marker.png) to the device
 
 ## Inspiration
 [Human Pose and motion](https://github.com/daitomanabe/Human-Pose-and-Motion): an extensive overview of the topic in media history, by Daito Manabe
