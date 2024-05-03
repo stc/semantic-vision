@@ -1,0 +1,321 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="importmap">
+    {
+      "imports": {
+	      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+	      "three/addons/": "../../libs/jsm/",
+	      "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { MindARThree } from 'mindar-image-three';
+    
+    // load videos here
+    let video0 = document.getElementById('video0');
+    video0.play();
+    const videoTexture0 = new THREE.VideoTexture(video0);
+    videoTexture0.format = THREE.RGBAFormat;
+
+    let video1 = document.getElementById('video1');
+    video1.play();
+    const videoTexture1 = new THREE.VideoTexture(video1);
+    videoTexture1.format = THREE.RGBAFormat;
+
+    let video2 = document.getElementById('video2');
+    video2.play();
+    const videoTexture2 = new THREE.VideoTexture(video2);
+    videoTexture2.format = THREE.RGBAFormat;
+
+    let video3 = document.getElementById('video3');
+    video3.play();
+    const videoTexture3 = new THREE.VideoTexture(video3);
+    videoTexture3.format = THREE.RGBAFormat;
+
+    let video4 = document.getElementById('video4');
+    video4.play();
+    const videoTexture4 = new THREE.VideoTexture(video4);
+    videoTexture4.format = THREE.RGBAFormat;
+
+    let video5 = document.getElementById('video5');
+    video5.play();
+    const videoTexture5 = new THREE.VideoTexture(video5);
+    videoTexture5.format = THREE.RGBAFormat;
+
+    let video6 = document.getElementById('video6');
+    video6.play();
+    const videoTexture6 = new THREE.VideoTexture(video6);
+    videoTexture6.format = THREE.RGBAFormat;
+
+    let video7 = document.getElementById('video7');
+    video7.play();
+    const videoTexture7 = new THREE.VideoTexture(video7);
+    videoTexture7.format = THREE.RGBAFormat;
+
+    let video8 = document.getElementById('video8');
+    video8.play();
+    const videoTexture8 = new THREE.VideoTexture(video8);
+    videoTexture8.format = THREE.RGBAFormat;
+
+    let video9 = document.getElementById('video9');
+    video9.play();
+    const videoTexture9 = new THREE.VideoTexture(video9);
+    videoTexture9.format = THREE.RGBAFormat;
+
+    let video10 = document.getElementById('video10');
+    video10.play();
+    const videoTexture10 = new THREE.VideoTexture(video10);
+    videoTexture10.format = THREE.RGBAFormat;
+
+    let video11 = document.getElementById('video11');
+    video11.play();
+    const videoTexture11 = new THREE.VideoTexture(video11);
+    videoTexture11.format = THREE.RGBAFormat;
+
+    let video12 = document.getElementById('video12');
+    video12.play();
+    const videoTexture12 = new THREE.VideoTexture(video12);
+    videoTexture12.format = THREE.RGBAFormat;
+
+    let video13 = document.getElementById('video13');
+    video13.play();
+    const videoTexture13 = new THREE.VideoTexture(video13);
+    videoTexture13.format = THREE.RGBAFormat;
+
+    let video14 = document.getElementById('video14');
+    video14.play();
+    const videoTexture14 = new THREE.VideoTexture(video14);
+    videoTexture14.format = THREE.RGBAFormat;
+
+    let video15 = document.getElementById('video15');
+    video15.play();
+    const videoTexture15 = new THREE.VideoTexture(video15);
+    videoTexture15.format = THREE.RGBAFormat;
+
+    let video16 = document.getElementById('video16');
+    video16.play();
+    const videoTexture16 = new THREE.VideoTexture(video16);
+    videoTexture16.format = THREE.RGBAFormat;
+
+    
+
+  
+
+
+    // create a mindar object using threejs
+    const mindarThree = new MindARThree({
+      container: document.querySelector("#container"),
+      imageTargetSrc: "./targets.mind"
+    });
+
+    // setup the scene in threejs
+    const { renderer, scene, camera } = mindarThree;
+    
+    // add anchors for videos here
+    const anchor0 = mindarThree.addAnchor(0);
+    const geometry0 = new THREE.PlaneGeometry(1, 1);
+    const material0 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture0 });
+    const plane0 = new THREE.Mesh(geometry0, material0);
+    anchor0.group.add(plane0);
+
+    const anchor1 = mindarThree.addAnchor(1);
+    const geometry1 = new THREE.PlaneGeometry(1, 1);
+    const material1 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture1 });
+    const plane1 = new THREE.Mesh(geometry1, material1);
+    anchor1.group.add(plane1);
+
+    const anchor2 = mindarThree.addAnchor(2);
+    const geometry2 = new THREE.PlaneGeometry(1, 1);
+    const material2 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture2 });
+    const plane2 = new THREE.Mesh(geometry2, material2);
+    anchor2.group.add(plane2);
+
+    const anchor3 = mindarThree.addAnchor(3);
+    const geometry3 = new THREE.PlaneGeometry(1, 1);
+    const material3 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture3 });
+    const plane3 = new THREE.Mesh(geometry3, material3);
+    anchor3.group.add(plane3);
+
+    const anchor4 = mindarThree.addAnchor(4);
+    const geometry4 = new THREE.PlaneGeometry(1, 1);
+    const material4 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture4 });
+    const plane4 = new THREE.Mesh(geometry4, material4);
+    anchor4.group.add(plane4);
+
+    const anchor5 = mindarThree.addAnchor(5);
+    const geometry5 = new THREE.PlaneGeometry(1, 1);
+    const material5 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture5 });
+    const plane5 = new THREE.Mesh(geometry5, material5);
+    anchor5.group.add(plane5);
+
+    const anchor6 = mindarThree.addAnchor(6);
+    const geometry6 = new THREE.PlaneGeometry(1, 1);
+    const material6 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture6 });
+    const plane6 = new THREE.Mesh(geometry6, material6);
+    anchor6.group.add(plane6);
+
+    const anchor7 = mindarThree.addAnchor(7);
+    const geometry7 = new THREE.PlaneGeometry(1, 1);
+    const material7 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture7 });
+    const plane7 = new THREE.Mesh(geometry7, material7);
+    anchor7.group.add(plane7);
+
+    const anchor8 = mindarThree.addAnchor(8);
+    const geometry8 = new THREE.PlaneGeometry(1, 1);
+    const material8 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture8 });
+    const plane8 = new THREE.Mesh(geometry8, material8);
+    anchor8.group.add(plane8);
+
+    const anchor9 = mindarThree.addAnchor(9);
+    const geometry9 = new THREE.PlaneGeometry(1, 1);
+    const material9 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture9 });
+    const plane9 = new THREE.Mesh(geometry9, material9);
+    anchor9.group.add(plane9);
+
+    const anchor10 = mindarThree.addAnchor(10);
+    const geometry10 = new THREE.PlaneGeometry(1, 1);
+    const material10 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture10 });
+    const plane10 = new THREE.Mesh(geometry10, material10);
+    anchor10.group.add(plane10);
+
+    const anchor11 = mindarThree.addAnchor(11);
+    const geometry11 = new THREE.PlaneGeometry(1, 1);
+    const material11 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture11 });
+    const plane11 = new THREE.Mesh(geometry11, material11);
+    anchor11.group.add(plane11);
+
+    const anchor12 = mindarThree.addAnchor(12);
+    const geometry12 = new THREE.PlaneGeometry(1, 1);
+    const material12 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture12 });
+    const plane12 = new THREE.Mesh(geometry12, material12);
+    anchor12.group.add(plane12);
+
+    const anchor13 = mindarThree.addAnchor(13);
+    const geometry13 = new THREE.PlaneGeometry(1, 1);
+    const material13 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture13 });
+    const plane13 = new THREE.Mesh(geometry13, material13);
+    anchor13.group.add(plane13);
+
+    const anchor14 = mindarThree.addAnchor(14);
+    const geometry14 = new THREE.PlaneGeometry(1, 1);
+    const material14 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture14 });
+    const plane14 = new THREE.Mesh(geometry14, material14);
+    anchor14.group.add(plane14);
+
+    const anchor15 = mindarThree.addAnchor(15);
+    const geometry15 = new THREE.PlaneGeometry(1, 1);
+    const material15 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture15 });
+    const plane15 = new THREE.Mesh(geometry15, material15);
+    anchor15.group.add(plane15);
+
+    const anchor16 = mindarThree.addAnchor(16);
+    const geometry16 = new THREE.PlaneGeometry(1, 1);
+    const material16 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture16 });
+    const plane16 = new THREE.Mesh(geometry16, material16);
+    anchor16.group.add(plane16);
+
+    const start = async () => {
+      await mindarThree.start();
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
+      });
+    }
+    const startButton = document.querySelector("#startButton");
+    startButton.addEventListener("click", () => {
+      start();
+    });
+    stopButton.addEventListener("click", () => {
+      mindarThree.stop();
+      mindarThree.renderer.setAnimationLoop(null);
+    });
+  </script>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #control {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <video id="video0" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/Cover.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video1" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/Page_4.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video2" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_18.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video3" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_19.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video4" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/Page_20.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video5" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/Page_21.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video6" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_38.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video7" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_39.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video8" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_40.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video9" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_41.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video10" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_42.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video11" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_43.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video12" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_44.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video13" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_45.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video14" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_46.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video15" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/pg_47.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video16" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/Cover.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+
+
+
+
+  <div id="control">
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+  </div>
+  <div id="container">
+  </div>
+</body>
+
+</html>
