@@ -6,107 +6,126 @@
     {
       "imports": {
 	      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-	      "three/addons/": "../../libs/jsm/",
+	      "three/addons/": "../libs/jsm/",
 	      "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
       }
     }
   </script>
+
+<script> // load random project
+
+function loadSource() {
+  
+  let projectVideo= document.getElementById("project")
+  let sourcePath
+  let sourcePath0 = "./assets/video/collab_branding.webm"
+  let sourcePath1 = "./assets/video/collab_card.webm"
+  let sourcePath2 = "./assets/video/collab_museum.webm"
+
+  let randomNumber = Math.floor(Math.random() * 3); // 0, 1, or 2
+  if (randomNumber == 0) { sourcePath = sourcePath0 }
+  if (randomNumber == 1) { sourcePath = sourcePath1 }
+  if (randomNumber == 2) { sourcePath = sourcePath2 }
+
+  document.getElementById("projectSource").removeAttribute("src");
+  document.getElementById("projectSource").setAttribute("src", sourcePath );
+  projectVideo.load()
+  projectVideo.play()
+}
+
+</script>
+
   <script type="module">
     import * as THREE from 'three';
     import { MindARThree } from 'mindar-image-three';
     
-    // load videos here
-    let video0 = document.getElementById('balint_bg');
-    video0.play();
+  // load videos here
+    let video0 = document.getElementById('balint');
     const videoTexture0 = new THREE.VideoTexture(video0);
     videoTexture0.format = THREE.RGBAFormat;
 
-    let video3 = document.getElementById('balint');
-    video0.play();
-    const videoTexture3 = new THREE.VideoTexture(video3);
-    videoTexture3.format = THREE.RGBAFormat;
-
-    let video5 = document.getElementById('sara_bg');
-    video0.play();
-    const videoTexture5 = new THREE.VideoTexture(video5);
-    videoTexture5.format = THREE.RGBAFormat;
-
-    let video1 = document.getElementById('sara');
-    video1.play();
+    let video1 = document.getElementById('balint_bg');
     const videoTexture1 = new THREE.VideoTexture(video1);
     videoTexture1.format = THREE.RGBAFormat;
 
-    let video2 = document.getElementById('project_bg');
-    video2.play();
+    let video2 = document.getElementById('sara');
     const videoTexture2 = new THREE.VideoTexture(video2);
     videoTexture2.format = THREE.RGBAFormat;
 
-    let video4 = document.getElementById('project_01');
-    video4.play();
+    let video3 = document.getElementById('sara_bg');
+    const videoTexture3 = new THREE.VideoTexture(video3);
+    videoTexture3.format = THREE.RGBAFormat;
+
+    let video4 = document.getElementById('project');
     const videoTexture4 = new THREE.VideoTexture(video4);
     videoTexture4.format = THREE.RGBAFormat;
 
-    // create a mindar object using threejs
+    let video5 = document.getElementById('project_bg');
+    const videoTexture5 = new THREE.VideoTexture(video5);
+    videoTexture5.format = THREE.RGBAFormat;
+
+  // create a mindar object using threejs
     const mindarThree = new MindARThree({
       container: document.querySelector("#container"),
-      imageTargetSrc: "./assets/mind/targets-video.mind"
+      imageTargetSrc: "./assets/targets.mind"
     });
 
-    // setup the scene in threejs
+  // setup the scene in threejs
     const { renderer, scene, camera } = mindarThree;
     
-    // add anchors for videos here
-    // balint_bg
-    const anchor0 = mindarThree.addAnchor(0);
-    const geometry0 = new THREE.PlaneGeometry(1, 1.5);
-    const material0 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture0 });
-    const plane0 = new THREE.Mesh(geometry0, material0);
-    anchor0.group.add(plane0);
+  // add anchors for videos here
 
     // balint
-    let anchor3 = mindarThree.addAnchor(0);
-    const geometry3 = new THREE.PlaneGeometry(1, 1.5);
-    anchor3.onTargetFound = function() {
-      document.getElementById("balint").play()
-    }
-    const material3 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture3 });
-    const plane3 = new THREE.Mesh(geometry3, material3);
-    plane3.translateZ(0.25);
-    anchor3.group.add(plane3);
+    const anchor0 = mindarThree.addAnchor(0);
+    const geometry0 = new THREE.PlaneGeometry(1.2, 1.8);
+    anchor0.onTargetFound = function() { document.getElementById("balint").play() }
+    const material0 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture0 });
+    const plane0 = new THREE.Mesh(geometry0, material0);
+    plane0.translateY(0.25);
+    plane0.translateZ(0.25);
+    anchor0.group.add(plane0);
 
-  // sara_bg
-    const anchor5 = mindarThree.addAnchor(1);
-    const geometry5 = new THREE.PlaneGeometry(1, 1.5);
-    const material5 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture5 });
-    const plane5 = new THREE.Mesh(geometry5, material5);
-    anchor5.group.add(plane0);
-
-    // sara
-    const anchor1 = mindarThree.addAnchor(1);
-    const geometry1 = new THREE.PlaneGeometry(1, 1.5);
-    anchor1.onTargetFound = function() {
-      document.getElementById("sara").play()
-    }
+    // balint_bg   
+    const anchor1 = mindarThree.addAnchor(0);
+    const geometry1 = new THREE.PlaneGeometry(1.2, 1.8);
     const material1 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture1 });
     const plane1 = new THREE.Mesh(geometry1, material1);
-    plane1.translateZ(0.25);
+    plane1.translateY(0.25);
     anchor1.group.add(plane1);
 
-    // project_bg
-    const anchor2 = mindarThree.addAnchor(2);
-    const geometry2 = new THREE.PlaneGeometry(1.5, 1);
+    // sara
+    const anchor2 = mindarThree.addAnchor(1);
+    const geometry2 = new THREE.PlaneGeometry(1.2, 1.8);
+    anchor2.onTargetFound = function() { document.getElementById("sara").play() }
     const material2 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture2 });
     const plane2 = new THREE.Mesh(geometry2, material2);
+    plane2.translateY(0.25);
+    plane2.translateZ(0.25);
     anchor2.group.add(plane2);
 
-    // project_01
+    // sara_bg
+    const anchor3 = mindarThree.addAnchor(1);
+    const geometry3 = new THREE.PlaneGeometry(1.2, 1.8);
+    const material3 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture3 });
+    const plane3 = new THREE.Mesh(geometry3, material3);
+    plane3.translateY(0.25);
+    anchor3.group.add(plane3);
+
+    // project
     const anchor4 = mindarThree.addAnchor(2);
     const geometry4 = new THREE.PlaneGeometry(1.5, 1);
+    anchor4.onTargetFound = function() { loadSource() };
     const material4 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture4 });
     const plane4 = new THREE.Mesh(geometry4, material4);
     plane4.translateZ(0.25);
     anchor4.group.add(plane4);
 
+    // project_bg
+    const anchor5 = mindarThree.addAnchor(2);
+    const geometry5 = new THREE.PlaneGeometry(1.75, 1.25);
+    const material5 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture5 });
+    const plane5 = new THREE.Mesh(geometry5, material5);
+    anchor5.group.add(plane5);
 
     const start = async () => {
       await mindarThree.start();
@@ -146,26 +165,25 @@
 
 <body>
   
-  <video id="balint_bg" crossOrigin="anonymous" playsinline style="display:none">
-    <source src="./assets/video/background.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-  </video>
   <video id="balint" crossOrigin="anonymous" playsinline style="display:none">
     <source src="./assets/video/balint_skill.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
-  
-  <video id="sara_bg" crossOrigin="anonymous" playsinline style="display:none">
+  <video id="balint_bg" crossOrigin="anonymous" playsinline style="display:none">
     <source src="./assets/video/background.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
+  
   <video id="sara" crossOrigin="anonymous" playsinline style="display:none">
     <source src="./assets/video/sara_skill.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
+  <video id="sara_bg" crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/video/background.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
 
-
+  <video id="project" crossOrigin="anonymous" playsinline style="display:none">
+    <source src="" id="projectSource" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
   <video id="project_bg" crossOrigin="anonymous" playsinline style="display:none">
     <source src="./assets/video/big_bg.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-  </video>
-  <video id="project_01" crossOrigin="anonymous" playsinline style="display:none">
-    <source src="./assets/video/project_01.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
 
   <div id="control">
