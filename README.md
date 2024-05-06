@@ -32,7 +32,23 @@ We are using the free and open source [p5js](https://p5js.org/) library to creat
 
 ## Class Works
 
-[Tarot Card Divination](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/index.html) (Boszorkány Project). After opening the previous link on your phone, show [this image](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/marker.png) to the device
+[Tarot Card Divination](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/index.html) (Boszorkány Project). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/marker.png) shown to the device
+
+[Skill Cards](https://stc.github.io/semantic-vision/class_works/002-SkillCards/)
+
+[Turing Book](https://stc.github.io/semantic-vision/class_works/003-Turing/index.html). 
+
+[Garbage Identifier](https://stc.github.io/semantic-vision/class_works/004-Garbage-Identifier/index.html) Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/004-Garbage-Identifier/Cola1.PNG) shown to the device
+
+[Zodiac Jewelery](https://stc.github.io/semantic-vision/class_works/005-Zodiac/index.html). 
+
+[Augmented Posters](https://stc.github.io/semantic-vision/class_works/006-Posters/index.html). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/006-Posters/assets/markers/tri_totitreba.png) shown to the device
+
+[Community Garden](https://stc.github.io/semantic-vision/class_works/007-Community-Garden/index.html). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/007-Community-Garden/assets/markers/cv_marker_00.jpg) shown to the device
+
+[Campus Monsters](https://stc.github.io/semantic-vision/class_works/008-Campus-Monsters/index.html). 
+
+[Classroom Schedule](https://stc.github.io/semantic-vision/class_works/009-Classroom-Schedule/index.html). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/009-Classroom-Schedule/assets/markers/marker_01-room_101.png) shown to the device
 
 ## Inspiration
 [Human Pose and motion](https://github.com/daitomanabe/Human-Pose-and-Motion): an extensive overview of the topic in media history, by Daito Manabe

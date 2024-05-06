@@ -1,0 +1,213 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+    <!-- scanning image style -->
+
+    <style>
+      #scanning-overlay {
+	      display: flex;
+	      align-items: center;
+	      justify-content: center;
+	      position: absolute;
+	      left: 0;
+	      right: 0;
+	      top: 0;
+	      bottom: 0;
+	      background: transparent;
+	      z-index: 2;
+      }
+      
+      @media (min-aspect-ratio: 1/1) {
+	      #scanning-overlay .inner {
+	        width: 50vh;
+	        height: 50vh;
+	      }
+      }
+      
+      @media (max-aspect-ratio: 1/1) {
+	      #scanning-overlay .inner {
+	        width: 80vw;
+	        height: 80vw;
+	      }
+      }
+
+      #scanning-overlay .inner {
+	      display: flex;
+	      align-items: center;
+	      justify-content: center;
+	      position: relative;
+
+	      background:
+	        linear-gradient(to right, white 10px, transparent 10px) 0 0,
+      	  linear-gradient(to right, white 10px, transparent 10px) 0 100%,
+	        linear-gradient(to left, white 10px, transparent 10px) 100% 0,
+      	  linear-gradient(to left, white 10px, transparent 10px) 100% 100%,
+	        linear-gradient(to bottom, white 10px, transparent 10px) 0 0,
+	        linear-gradient(to bottom, white 10px, transparent 10px) 100% 0,
+	        linear-gradient(to top, white 10px, transparent 10px) 0 100%,
+	        linear-gradient(to top, white 10px, transparent 10px) 100% 100%;
+	      
+          background-repeat: no-repeat;
+	        background-size: 40px 40px;
+      }
+
+      #scanning-overlay.hidden {
+	      display: none;
+      }
+
+      #scanning-overlay img {
+	      /* image opacity & size */
+        opacity: 0.5;     
+	      width: 70%;
+	      align-self: center;
+      }
+
+      #scanning-overlay .inner .scanline {
+	      position: absolute;
+	      width: 100%;
+	      height: 10px;
+	      background: white;
+	      animation: move 2s linear infinite;
+      }
+      
+      @keyframes move {
+	      0%, 100% { top: 0% }
+	      50% { top: calc(100% - 10px) }
+      }
+   
+    </style>
+
+    <!-- scanning image style END -->
+
+  </head>
+  <body>
+    
+    <!-- custom scanning image div -->
+    <div id="scanning-overlay" class="hidden">
+      <div class="inner">
+	      <img src="./assets/images/scanning_img.png">
+	      <div class="scanline"></div>
+      </div>
+    </div>
+    <!-- custom scanning image div END-->
+
+    <a-scene mindar-image="warmupTolerance: 25; missTolerance: 25; filterMinCF: 0.001; filterBeta: 100; uiScanning: #scanning-overlay; imageTargetSrc: ./targets_doors.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <!-- IDs of images to be shown -->
+      <a-assets>
+        <img id="card_00" src="./assets/images/timetable-00.png" />
+        <img id="card_01" src="./assets/images/timetable-01.png" />
+        <img id="card_02" src="./assets/images/timetable-02.png" />
+        <img id="card_03" src="./assets/images/timetable-03.png" />
+        <img id="card_04" src="./assets/images/timetable-04.png" />
+        <img id="card_05" src="./assets/images/timetable-05.png" />
+        <img id="card_06" src="./assets/images/timetable-06.png" />
+        <img id="card_07" src="./assets/images/timetable-07.png" />
+        <img id="card_08" src="./assets/images/timetable-08.png" />
+        <img id="card_09" src="./assets/images/timetable-09.png" />
+        <img id="CTA" src="./assets/images/CTA.png" />
+	    </a-assets>
+
+      <!-- camera setup -->
+      <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
+
+      <!-- <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable" camera="" rotation="" wasd-controls=""> 
+      </a-camera>-->
+
+      <!-- assign and position images to markers -->
+
+      <!-- Settings
+              rotation: vízszint, függőleges, fordítás
+              position: vízszint + jobb, - bal
+                        függőleges + fel, - le
+                        + közelebb, - messzebb
+
+      -->
+
+
+<!-- 
+       <a-entity mindar-image-target="targetIndex: 0"> 
+        <a-plane src="#card_00" position="0 4 0" height="2.82" width="1" rotation="90 0 0" transparent="true"></a-plane> 
+        <a-plane src="#card_01" position="-2 2 0" height="2.82" width="1" rotation="0 90 90" transparent="true"></a-plane>
+      </a-entity> 
+
+      <a-entity mindar-image-target="targetIndex: 0"> 
+        <a-plane src="#card_00" position="0 4 0" height="2.82" width="1" rotation="90 0 0" transparent="true"></a-plane> 
+        <a-plane src="#card_01" position="-2 2 0" height="2.82" width="1" rotation="0 90 90" transparent="true"></a-plane>
+      </a-entity>
+--> 
+
+      <!-- marker ID - 0 - B_101 -->
+      <a-entity mindar-image-target="targetIndex: 0"> 
+      <a-plane src="#card_00" position="0 0 0" height="3,89" width="2.18" rotation="0 0 0"></a-plane> 
+      </a-entity>
+
+      <!-- marker ID - 1 - B_102 -->
+      <a-entity mindar-image-target="targetIndex: 1">
+      <a-plane src="#card_01" position="0 0 0" height="3,89" width="2.18" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 2 - B_103 -->
+      <a-entity mindar-image-target="targetIndex: 2"> <!-- marker ID -->
+        <a-plane src="#card_02" position="0 0 0" height="3,89" width="2.18" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 3 - B_106A -->
+      <a-entity mindar-image-target="targetIndex: 3"> <!-- marker ID -->
+        <a-plane src="#card_03" position="0 0 0" height="3,89" width="2.18" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 4 - B_106B -->
+      <a-entity mindar-image-target="targetIndex: 4"> <!-- marker ID -->
+        <a-plane src="#card_04" position="0 0 0" height="3,89" width="2.18" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 5 - B_106Ü -->
+      <a-entity mindar-image-target="targetIndex: 5"> <!-- marker ID -->
+        <a-plane src="#card_05" position="0 0 0" height="3,89" width="2.18" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 6 - B_107 -->
+      <a-entity mindar-image-target="targetIndex: 6"> <!-- marker ID -->
+        <a-plane src="#card_06" position="0 0 0" height="3,89" width="2.18" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 7 - B_107G -->
+      <a-entity mindar-image-target="targetIndex: 7"> <!-- marker ID -->
+        <a-plane src="#card_07" position="0 0 0" height="2.377" width="2.92" rotation="0 0 0" transparent="true"></a-plane>
+        <a-plane id="ctaCall" src="#CTA" position="0.93 -0.95 0.05" height="0.15" width="0.8" rotation="0 0 0" class="clickable"></a-plane> 
+      </a-entity>
+
+      <!-- marker ID - 8 - B_108 -->
+      <a-entity mindar-image-target="targetIndex: 8"> <!-- marker ID -->
+        <a-plane src="#card_08" position="0 0 0" height="3,89" width="2.18" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 9 - B_109 -->
+      <a-entity mindar-image-target="targetIndex: 9"> <!-- marker ID -->
+        <a-plane src="#card_09" position="0 0 0" height="3,89" width="2.18" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+      <!--
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane src="#card1" position="1 0 0" height="1" width="1" rotation="0 0 0"></a-plane>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-plane src="#card2" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-plane>
+        <a-plane src="#card1" position="1 0 0" height="1" width="1" rotation="0 0 0"></a-plane>
+      </a-entity>
+
+      -->
+    </a-scene>
+    <script>
+
+      document.querySelector('#ctaCall').addEventListener("click", event => {
+          window.location.href = "tel://+36706847107";
+      });
+
+    </script>
+  </body>
+</html>
