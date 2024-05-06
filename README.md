@@ -34,7 +34,7 @@ We are using the free and open source [p5js](https://p5js.org/) library to creat
 
 [Tarot Card Divination](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/index.html) (Boszorkány Project). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/marker.png) shown to the device
 
-[Skill Cards](https://stc.github.io/semantic-vision/class_works/002-SkillCards/)
+[Skill Cards](https://stc.github.io/semantic-vision/class_works/002-SkillCards/) Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/002-SkillCards/assets/Markers/Sara_02.png) shown to the device
 
 [Turing Book](https://stc.github.io/semantic-vision/class_works/003-Turing/index.html). 
 
