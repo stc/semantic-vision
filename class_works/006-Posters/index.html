@@ -1,0 +1,155 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+        "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { MindARThree } from 'mindar-image-three';
+
+    // Function to load videos
+    const loadVideo = (id) => {
+      const video = document.getElementById(id);
+      video.play();
+      const videoTexture = new THREE.VideoTexture(video);
+      videoTexture.format = THREE.RGBAFormat;
+      return videoTexture;
+    };
+
+    // Load all videos
+    const videoTextures = {
+      video1: loadVideo('video1'),
+      video2: loadVideo('video2'),
+      video3: loadVideo('video3'),
+      video4: loadVideo('video4'),
+      video5: loadVideo('video5'),
+      video6: loadVideo('video6')
+    };
+
+    // create a mindar object using threejs
+    const mindarThree = new MindARThree({
+      container: document.querySelector("#container"),
+      imageTargetSrc: "./targets.mind"
+      
+    });
+
+    // setup the scene in threejs
+    const { renderer, scene, camera } = mindarThree;
+
+    // Function to add anchor for a video with a specified position
+    const addAnchor = (markerId, videoTexture, width, height, position) => {
+      const anchor = mindarThree.addAnchor(markerId);
+      const geometry = new THREE.PlaneGeometry(width, height);
+      const material = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.75, map: videoTexture });
+
+      const plane = new THREE.Mesh(geometry, material);
+      plane.position.set(position.x, position.y, position.z); // Set the position
+      plane.receiveShadow = true; // Enable shadow reception
+      anchor.group.add(plane);
+
+      // Add this code to enable shadows in your renderer
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soften shadow edges for a better look
+
+      // Add a light source that casts shadows
+      const directionalLight = new THREE.DirectionalLight(0x000000, 1);
+      directionalLight.position.set(0, 15, 15);
+      directionalLight.castShadow = true; // Enable shadow casting
+      scene.add(directionalLight);
+
+      // Set up shadow properties for the light
+      directionalLight.shadow.mapSize.width = 1024; // Shadow map width
+      directionalLight.shadow.mapSize.height = 1024; // Shadow map height
+      directionalLight.shadow.camera.near = 25; // Near shadow frustum
+      directionalLight.shadow.camera.far = 70; // Far shadow frustum
+
+    };
+
+    // Add anchors for each video with a downward translation
+    addAnchor(0, videoTextures.video1, 2.8, 2.8, { x: 0, y: -0.8, z: 0.5 }); 
+    addAnchor(0, videoTextures.video2, 2.8, 2.8, { x: 0, y: -0.8, z: 0.47 }); 
+    addAnchor(1, videoTextures.video3, 2.8, 2.8, { x: 0, y: -0.5, z: 0.5 });
+    addAnchor(1, videoTextures.video4, 2.8, 2.8, { x: 0, y: -0.5, z: 0.47 }); 
+    addAnchor(2, videoTextures.video5, 2.8, 2.8, { x: 0, y: -0.5, z: 0.5 });
+    addAnchor(2, videoTextures.video6, 2.8, 2.8, { x: 0, y: -0.5, z: 0.47 });   
+
+    // Immediately start the AR scene
+    const start = async () => {
+      await mindarThree.start();
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
+      });
+    }
+    start(); // Call start function immediately
+
+    const stopButton = document.querySelector("#stopButton");
+    stopButton.addEventListener("click", () => {
+      mindarThree.stop();
+      mindarThree.renderer.setAnimationLoop(null);
+    });
+  </script>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #control {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+
+    .mindar-ui-scanning .scanning .inner {
+      opacity: .4 !important;
+      background: linear-gradient(to right,#EA2728 10px,transparent 10px) 0 0,linear-gradient(to right,#EA2728 10px,transparent 10px) 0 100%,linear-gradient(to left,#EA2728 10px,transparent 10px) 100% 0,linear-gradient(to left,#EA2728 10px,transparent 10px) 100% 100%,linear-gradient(to bottom,#EA2728 10px,transparent 10px) 0 0,linear-gradient(to bottom,#EA2728 10px,transparent 10px) 100% 0,linear-gradient(to top,#EA2728 10px,transparent 10px) 0 100%,linear-gradient(to top,#EA2728 10px,transparent 10px) 100% 100% !important; 
+    }
+
+    .mindar-ui-scanning .scanning .inner .scanline {
+      background: #EA2728 !important;
+      animation: move 3s linear infinite !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <video id="video1" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/vid-1.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video2" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/vid-2.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video3" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/vid-3.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video4" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/vid-4.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video5" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/vid-5.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <video id="video6" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/vid-6.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+
+  <div id="container">
+  </div>
+</body>
+
+</html>

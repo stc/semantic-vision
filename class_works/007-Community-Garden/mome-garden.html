@@ -1,0 +1,285 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+    <!-- scanning image style -->
+
+    <style>
+      #scanning-overlay {
+	      display: flex;
+	      align-items: center;
+	      justify-content: center;
+	      position: absolute;
+	      left: 0;
+	      right: 0;
+	      top: 0;
+	      bottom: 0;
+	      background: transparent;
+	      z-index: 2;
+      }
+      
+      @media (min-aspect-ratio: 1/1) {
+	      #scanning-overlay .inner {
+	        width: 50vh;
+	        height: 50vh;
+	      }
+      }
+      
+      @media (max-aspect-ratio: 1/1) {
+	      #scanning-overlay .inner {
+	        width: 80vw;
+	        height: 80vw;
+	      }
+      }
+
+      #scanning-overlay .inner {
+	      display: flex;
+	      align-items: center;
+	      justify-content: center;
+	      position: relative;
+
+	      background:
+	        linear-gradient(to right, white 10px, transparent 10px) 0 0,
+      	  linear-gradient(to right, white 10px, transparent 10px) 0 100%,
+	        linear-gradient(to left, white 10px, transparent 10px) 100% 0,
+      	  linear-gradient(to left, white 10px, transparent 10px) 100% 100%,
+	        linear-gradient(to bottom, white 10px, transparent 10px) 0 0,
+	        linear-gradient(to bottom, white 10px, transparent 10px) 100% 0,
+	        linear-gradient(to top, white 10px, transparent 10px) 0 100%,
+	        linear-gradient(to top, white 10px, transparent 10px) 100% 100%;
+	      
+          background-repeat: no-repeat;
+	        background-size: 40px 40px;
+      }
+
+      #scanning-overlay.hidden {
+	      display: none;
+      }
+
+      #scanning-overlay img {
+	      /* image opacity & size */
+        opacity: 0.5;     
+	      width: 70%;
+	      align-self: center;
+      }
+
+      #scanning-overlay .inner .scanline {
+	      position: absolute;
+	      width: 100%;
+	      height: 10px;
+	      background: white;
+	      animation: move 2s linear infinite;
+      }
+      
+      @keyframes move {
+	      0%, 100% { top: 0% }
+	      50% { top: calc(100% - 10px) }
+      }
+   
+    </style>
+
+    <!-- scanning image style END -->
+
+    <!-- Slideshow script -->
+    <!--
+    <script>
+      const showPortfolio = (done) => {
+        const portfolio = document.querySelector("#portfolio-panel");
+        const portfolioLeftButton = document.querySelector("#portfolio-left-button");
+        const portfolioRightButton = document.querySelector("#portfolio-right-button");
+        const paintandquestPreviewButton = document.querySelector("#paintandquest-preview-button");
+
+        let y = 0;
+        let currentItem = 0;
+
+        portfolio.setAttribute("visible", true);
+
+        const showPortfolioItem = (item) => {
+          for (let i = 0; i <= 2; i++) {
+            document.querySelector("#portfolio-item" + i).setAttribute("visible", i === item);
+          }
+        }
+        const id = setInterval(() => {
+          y += 0.008;
+          if (y >= 0.6) {
+            clearInterval(id);
+            portfolioLeftButton.setAttribute("visible", true);
+            portfolioRightButton.setAttribute("visible", true);
+            portfolioLeftButton.addEventListener('click', () => {
+              currentItem = (currentItem + 1) % 3;
+              showPortfolioItem(currentItem);
+            });
+            portfolioRightButton.addEventListener('click', () => {
+              currentItem = (currentItem - 1 + 3) % 3;
+              showPortfolioItem(currentItem);
+            });
+
+            paintandquestPreviewButton.addEventListener('click', () => {
+              paintandquestPreviewButton.setAttribute("visible", false);
+              const testVideo = document.createElement( "video" );
+              const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
+              if (canplayWebm == "") {
+                document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
+                document.querySelector("#paintandquest-video-mp4").play();
+              } else {
+                document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-webm");
+                document.querySelector("#paintandquest-video-webm").play();
+              }
+            });
+
+            setTimeout(() => {
+              done();
+            }, 500);
+          }
+          portfolio.setAttribute("position", "0 " + y + " -0.01");
+        }, 10);
+      }
+
+    </script>
+    -->
+    <!-- Slideshow script END -->
+
+  </head>
+  <body>
+    
+    <!-- custom scanning image div -->
+    <div id="scanning-overlay" class="hidden">
+      <div class="inner">
+	      <img src="./assets/images/scanning_img.png">
+	      <div class="scanline"></div>
+      </div>
+    </div>
+    <!-- custom scanning image div END-->
+
+    <a-scene mindar-image="filterMinCF:0.1; filterBeta: 10; uiScanning: #scanning-overlay; imageTargetSrc: ./targets_flowers.mind; maxTrack: 2;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <!-- IDs of images to be shown -->
+      <a-assets>
+        <img id="card_00" src="./assets/images/plant-card-00.png" />
+        <img id="card_00b" src="./assets/images/plant-card-00-b.png" />
+        <img id="card_01" src="./assets/images/plant-card-01.png" />
+        <img id="card_02" src="./assets/images/plant-card-02.png" />
+        <img id="card_03" src="./assets/images/plant-card-03.png" />
+        <img id="card_04" src="./assets/images/plant-card-04.png" />
+        <img id="card_05" src="./assets/images/plant-card-05.png" />
+        <img id="card_06" src="./assets/images/plant-card-06.png" />
+        <img id="card_07" src="./assets/images/plant-card-07.png" />
+        <img id="card_08" src="./assets/images/plant-card-08.png" />
+        <img id="card_09" src="./assets/images/plant-card-09.png" />
+        <img id="CTA" src="./assets/images/CTA.png" />
+	    </a-assets>
+
+      <!-- camera setup -->
+      <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
+
+      <!-- assign and position images to markers -->
+
+      <!-- Settings
+              rotation: vízszint, függőleges, fordítás
+              position: vízszint + jobb, - bal
+                        függőleges + fel, - le
+                        + közelebb, - messzebb
+
+      -->
+
+      <!-- marker ID - 0 - TULIP -->
+      <a-entity mindar-image-target="targetIndex: 0, missTolerance: 10"> 
+        <a-plane src="#card_02" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane> 
+        <a-plane id="ctaWater" src="#CTA" position="0 -1.2 0.2" height="0.25" width="0.8" rotation="0 0 0" class="clickable"></a-plane> 
+      </a-entity>
+
+     
+<!--       <a-entity mindar-image-target="targetIndex: 0"> 
+        <a-plane src="#card_00" position="0 4 0" height="2.82" width="1" rotation="90 0 0" transparent="true"></a-plane> 
+        <a-plane src="#card_01" position="-2 2 0" height="2.82" width="1" rotation="0 90 90" transparent="true"></a-plane>
+      </a-entity> -->
+
+      <!-- marker ID - 1 -->
+      <a-entity mindar-image-target="targetIndex: 1"> <!-- marker ID -->
+        <a-plane src="#card_04" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 2 -->
+      <a-entity mindar-image-target="targetIndex: 2"> <!-- marker ID -->
+        <a-plane src="#card_08" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 3 -->
+      <a-entity mindar-image-target="targetIndex: 3"> <!-- marker ID -->
+        <a-plane src="#card_03" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 4 - HYACINTH -->
+      <a-entity mindar-image-target="targetIndex: 4"> <!-- marker ID -->
+        <a-plane src="#card_01" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 5 -->
+      <a-entity mindar-image-target="targetIndex: 5"> <!-- marker ID -->
+        <a-plane src="#card_05" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 6 -->
+      <a-entity mindar-image-target="targetIndex: 6"> <!-- marker ID -->
+        <a-plane src="#card_06" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 7 -->
+      <a-entity mindar-image-target="targetIndex: 7"> <!-- marker ID -->
+        <a-plane src="#card_07" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+
+      <!-- marker ID - 8 - BASIL -->
+      <a-entity mindar-image-target="targetIndex: 8"> <!-- marker ID -->
+        <a-plane src="#card_00" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane>
+
+        <!-- Slideshow --> <!--
+        <a-entity visible="false" id="portfolio-panel" position="0 0 -0.01">
+          <a-text value="Portfolio" color="black" align="center" width="2" position="0 0.4 0" text=""></a-text>
+          <a-entity id="portfolio-item0" visible="">
+            <a-video id="paintandquest-video-link" webkit-playsinline="" playsinline="" width="1" height="0.552" position="0 0 0" material="" geometry=""></a-video>
+            <a-image id="paintandquest-preview-button" class="clickable" src="#paintandquest-preview" alpha-test="0.5" position="0 0 0" height="0.552" width="1" material="" geometry="">
+            </a-image>
+          </a-entity>
+          <a-entity id="portfolio-item1" visible="false">
+            <a-image class="clickable" src="#coffeemachine-preview" alpha-test="0.5" position="0 0 0" height="0.552" width="1" material="" geometry="">
+            </a-image>
+          </a-entity>
+          <a-entity id="portfolio-item2" visible="false">
+            <a-image class="clickable" src="#peak-preview" alpha-test="0.5" position="0 0 0" height="0.552" width="1" material="" geometry="">
+            </a-image>
+          </a-entity>
+
+          <a-image visible="false" id="portfolio-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15" material="" geometry=""></a-image>
+          <a-image visible="false" id="portfolio-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15" material="" geometry=""></a-image>
+        </a-entity>
+        -->
+      </a-entity>
+
+      <!-- marker ID - 9 -->
+      <a-entity mindar-image-target="targetIndex: 9"> <!-- marker ID -->
+        <a-plane src="#card_09" position="0 0 0" height="2.08" width="1" rotation="0 0 0" transparent="true"></a-plane>
+      </a-entity>
+      <!--
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane src="#card1" position="1 0 0" height="1" width="1" rotation="0 0 0"></a-plane>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-plane src="#card2" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-plane>
+        <a-plane src="#card1" position="1 0 0" height="1" width="1" rotation="0 0 0"></a-plane>
+      </a-entity>
+
+      -->
+    </a-scene>
+    <script>
+
+      document.querySelector('#ctaWater').addEventListener("click", event => {
+          window.location.href = "https://pereviki.github.io/semantic-vision/007_augmented_reality_image_tracking/community-garden/form.html";
+      });
+
+    </script>
+  </body>
+</html>
