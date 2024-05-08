@@ -31,10 +31,15 @@
     const videoTexture2 = new THREE.VideoTexture(video2);
     videoTexture2.format = THREE.RGBAFormat;
 
+    let video3 = document.getElementById('video3');
+    video3.play();
+    const videoTexture3 = new THREE.VideoTexture(video3);
+    videoTexture3.format = THREE.RGBAFormat;
+
     // create a mindar object using threejs
     const mindarThree = new MindARThree({
       container: document.querySelector("#container"),
-      imageTargetSrc: "./zodiacsign.mind"
+      imageTargetSrc: "./targetsmalackartyak.mind"
     });
 
     // setup the scene in threejs
@@ -42,22 +47,28 @@
     
     // add anchors for videos here
     const anchor0 = mindarThree.addAnchor(0);
-    const geometry0 = new THREE.PlaneGeometry(2.9, 2.9);
+    const geometry0 = new THREE.PlaneGeometry(1, 1.55);
     const material0 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture0 });
     const plane0 = new THREE.Mesh(geometry0, material0);
     anchor0.group.add(plane0);
 
-    const geometry1 = new THREE.PlaneGeometry(2.5, 2.5);
+    const anchor1 = mindarThree.addAnchor(1);
+    const geometry1 = new THREE.PlaneGeometry(1, 1.55);
     const material1 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture1 });
     const plane1 = new THREE.Mesh(geometry1, material1);
-    plane1.translateZ(0.2)
-    anchor0.group.add(plane1);
+    anchor1.group.add(plane1);
 
-    const geometry2 = new THREE.PlaneGeometry(2.5, 2.5);
+    const anchor2 = mindarThree.addAnchor(2);
+    const geometry2 = new THREE.PlaneGeometry(1, 1.55);
     const material2 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture2 });
     const plane2 = new THREE.Mesh(geometry2, material2);
-    plane2.translateZ(0.5)
-    anchor0.group.add(plane2);
+    anchor2.group.add(plane2);
+
+    const anchor3 = mindarThree.addAnchor(3);
+    const geometry3 = new THREE.PlaneGeometry(1, 1.55);
+    const material3 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture2 });
+    const plane3 = new THREE.Mesh(geometry3, material3);
+    anchor3.group.add(plane3);
 
     const start = async () => {
       await mindarThree.start();
@@ -97,13 +108,16 @@
 
 <body>
   <video id="video0" loop crossOrigin="anonymous" playsinline style="display:none">
-    <source src="./assets/c.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    <source src="./assets/vid-0.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
   <video id="video1" loop crossOrigin="anonymous" playsinline style="display:none">
-    <source src="./assets/b.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    <source src="./assets/vid-1.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
   <video id="video2" loop crossOrigin="anonymous" playsinline style="display:none">
-    <source src="./assets/a.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    <source src="./assets/vid-2.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+    <video id="video3" loop crossOrigin="anonymous" playsinline style="display:none">
+      <source src="./assets/vid-3.webm" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
   </video>
   <div id="control">
     <button id="startButton">Start</button>
