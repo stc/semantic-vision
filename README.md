@@ -50,6 +50,10 @@ We are using the free and open source [p5js](https://p5js.org/) library to creat
 
 [Classroom Schedule](https://stc.github.io/semantic-vision/class_works/009-Classroom-Schedule/index.html). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/009-Classroom-Schedule/assets/markers/marker_01-room_101.png) shown to the device
 
+[Piggy Card Game](https://stc.github.io/semantic-vision/class_works/010-Piggy/index.html)
+
+[Movie Story](https://stc.github.io/semantic-vision/class_works/011-Movie-Story/index.html)
+
 ## Inspiration
 [Human Pose and motion](https://github.com/daitomanabe/Human-Pose-and-Motion): an extensive overview of the topic in media history, by Daito Manabe
 
