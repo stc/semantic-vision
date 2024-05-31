@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+        "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { MindARThree } from 'mindar-image-three';
+    
+    // Load videos here
+    const videoElements = [];
+    for (let i = 0; i <= 8; i++) {
+      let video = document.getElementById(`video${i}`);
+      video.play();
+      const videoTexture = new THREE.VideoTexture(video);
+      videoTexture.format = THREE.RGBAFormat;
+      videoElements.push(videoTexture);
+    }
+
+    // Create a MindAR object using Three.js
+    const mindarThree = new MindARThree({
+      container: document.querySelector("#container"),
+      imageTargetSrc: "./targets-6.mind"
+    });
+
+    // Setup the scene in Three.js
+    const { renderer, scene, camera } = mindarThree;
+
+    // Add anchors for videos here
+    for (let i = 0; i <= 8; i++) {
+      const anchor = mindarThree.addAnchor(i);
+      const geometry = new THREE.PlaneGeometry(1, 1.3);
+      const material = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoElements[i] });
+      const plane = new THREE.Mesh(geometry, material);
+      anchor.group.add(plane);
+    }
+
+    const start = async () => {
+      document.getElementById('background').style.display = 'none';
+      document.getElementById('control').style.display = 'none';
+      await mindarThree.start();
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
+      });
+    };
+
+    const startButton = document.querySelector("#startButton");
+    startButton.addEventListener("click", () => {
+      start();
+    });
+
+    const stopButton = document.querySelector("#stopButton");
+    stopButton.addEventListener("click", () => {
+      mindarThree.stop();
+      renderer.setAnimationLoop(null);
+      document.getElementById('background').style.display = 'block';
+      document.getElementById('control').style.display = 'flex';
+    });
+  </script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #background {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background: url('/assets/BG.jpg') no-repeat center center/cover;
+      z-index: 1;
+    }
+
+    #control {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      z-index: 2;
+    }
+
+    button {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: rgb(255, 0, 0);
+      color: white;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="background"></div>
+  <div id="container"></div>
+  <div id="control">
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+  </div>
+
+  <video id="video0" loop muted preload="auto" playsinline style="display:none">
+    <source src="./assets/bev.webm" type='video/webm; codecs="vp8, vp9, opus, vp8.0, vp9.0, vorbis"'>
+  </video>
+  <video id="video1" loop muted preload="auto" playsinline style="display:none">
+    <source src="./assets/tart.webm" type='video/webm; codecs="vp8, vp9, opus, vp8.0, vp9.0, vorbis"'>
+  </video>
+  <video id="video2" loop muted preload="auto" playsinline style="display:none">
+    <source src="./assets/dataism.webm" type='video/webm; codecs="vp8, vp9, opus, vp8.0, vp9.0, vorbis"'>
+  </video>
+  <video id="video3" loop muted preload="auto" playsinline style="display:none">
+    <source src="./assets/felho.webm" type='video/webm; codecs="vp8, vp9, opus, vp8.0, vp9.0", vorbis"'>
+  </video>
+  <video id="video4" loop muted preload="auto" playsinline style="display:none">
+    <source src="./assets/adatterm.webm" type='video/webm; codecs="vp8, vp9, opus, vp8.0, vp9.0", vorbis"'>
+  </video>
+  <video id="video5" loop muted preload="auto" playsinline style="display:none">
+    <source src="./assets/1perc.webm" type='video/webm; codecs="vp8, vp9, opus, vp8.0, vp9.0", vorbis"'>
+  </video>
+  <video id="video6"loop muted preload="auto" playsinline style="display:none">
+    <source src="./assets/hack.webm" type='video/webm; codecs="vp8, vp9, opus, vp8.0, vp9.0, vorbis"'>
+  </video>
+  <video id="video7" loop muted preload="auto" playsinline style="display:none">
+    <source src="./assets/fajok.webm" type='video/webm; codecs="vp8, vp9, opus, vp8.0, vp9.0, vorbis"'>
+  </video>
+  <video id="video8" loop muted preload="auto" playsinline style="display:none">
+    <source src="./assets/adathum.webm" type='video/webm; codecs="vp8, vp9, opus, vp8.0, vp9.0, vorbis"'>
+  </video>
+</body>
+
+</html>
