@@ -30,29 +30,6 @@ We are using the free and open source [p5js](https://p5js.org/) library to creat
 
 007 - [augmented reality + image tracking](https://stc.github.io/semantic-vision/007_augmented_reality_image_tracking/custom-image.html) - open this on your phone, then show [this image](https://stc.github.io/semantic-vision/007_augmented_reality_image_tracking/assets/marker.jpg) to your device. [Multiple videos example](https://stc.github.io/semantic-vision/007_augmented_reality_image_tracking/video-many.html)
 
-## Class Works
-
-[Tarot Card Divination](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/index.html) (Boszorkány Project). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/001-Tarot-Project/marker.png) shown to the device
-
-[Skill Cards](https://stc.github.io/semantic-vision/class_works/002-SkillCards/) Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/002-SkillCards/assets/Markers/Sara_02.png) shown to the device
-
-[Turing Book](https://stc.github.io/semantic-vision/class_works/003-Turing/index.html). 
-
-[Garbage Identifier](https://stc.github.io/semantic-vision/class_works/004-Garbage-Identifier/index.html) Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/004-Garbage-Identifier/Cola1.PNG) shown to the device
-
-[Zodiac Jewelery](https://stc.github.io/semantic-vision/class_works/005-Zodiac/index.html). 
-
-[Augmented Posters](https://stc.github.io/semantic-vision/class_works/006-Posters/index.html). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/006-Posters/assets/markers/tri_totitreba.png) shown to the device
-
-[Community Garden](https://stc.github.io/semantic-vision/class_works/007-Community-Garden/index.html). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/007-Community-Garden/assets/markers/cv_marker_00.jpg) shown to the device
-
-[Campus Monsters](https://stc.github.io/semantic-vision/class_works/008-Campus-Monsters/index.html). 
-
-[Classroom Schedule](https://stc.github.io/semantic-vision/class_works/009-Classroom-Schedule/index.html). Works with this [this marker image](https://stc.github.io/semantic-vision/class_works/009-Classroom-Schedule/assets/markers/marker_01-room_101.png) shown to the device
-
-[Piggy Card Game](https://stc.github.io/semantic-vision/class_works/010-Piggy/index.html)
-
-[Movie Story](https://stc.github.io/semantic-vision/class_works/011-Movie-Story/index.html)
 
 ## Inspiration
 [Human Pose and motion](https://github.com/daitomanabe/Human-Pose-and-Motion): an extensive overview of the topic in media history, by Daito Manabe
