@@ -13,14 +13,7 @@ function setup() {
   video.parent("videoContainer");
   video.size(320, 240);
 
-  // Extract the already learned features from MobileNet
-  featureExtractor = ml5.featureExtractor("MobileNet", modelReady);
-
-  // Create a new classifier using those features and give the video we want to use
-  const options = { numLabels: 3 };
-  classifier = featureExtractor.classification(video, options);
-  // Set up the UI buttons
-  setupButtons();
+  
 }
 
 // A function to be called when the model has been loaded
@@ -93,6 +86,17 @@ function setupButtons() {
       select("#modelStatus").html("Custom Model Loaded!");
     });
   });
+}
+
+function keyPressed() {
+  // Extract the already learned features from MobileNet
+  featureExtractor = ml5.featureExtractor("MobileNet", modelReady);
+
+  // Create a new classifier using those features and give the video we want to use
+  const options = { numLabels: 3 };
+  classifier = featureExtractor.classification(video, options);
+  // Set up the UI buttons
+  setupButtons();
 }
 
 // Show the results
