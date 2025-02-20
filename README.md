@@ -12,7 +12,7 @@ We are using the free and open source [p5js](https://p5js.org/) library to creat
 
 002 - 006 using ml5js and neural networks to learn to find custom features in the image
 
-007 - using mindAR (on top of A-Frame) as the computer vision engine and displays content in mixed reality
+007 - using [mindAR](https://hiukim.github.io/mind-ar-js-doc/) (on top of [A-Frame](https://aframe.io/)) as the computer vision engine and displays content in mixed reality
 
 ## Examples
 
