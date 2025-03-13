@@ -4,11 +4,14 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
+
   <body>
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" maxTrack: 2 color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" maxTrack: 2 color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false">
       <a-assets>
-	      <img id="card" src="./assets/flower.png" />
-	    </a-assets>
+        <img id="card" src="./assets/flower.png" />
+      </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
