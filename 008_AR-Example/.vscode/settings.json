@@ -1,0 +1,9 @@
+{
+    "liveServer.settings.root": "/",
+    "liveServer.settings.https": {
+      "enable": true,
+      "cert": "/Users/stc/Documents/Git/semantic-vision/008_AR-Example/localhost.pem",
+      "key": "/Users/stc/Documents/Git/semantic-vision/008_AR-Example/localhost.key",
+      "passphrase": "baba"
+    }
+  }
