@@ -1,0 +1,105 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="importmap">
+    {
+      "imports": {
+	      "three": "https://cdn.jsdelivr.net/npm/three@v0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.160.0/examples/jsm/",
+	      "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { MindARThree } from 'mindar-image-three';
+
+    // load video here
+    let video01 = document.getElementById('video01');
+    video01.play();
+    const videoTexture01 = new THREE.VideoTexture(video01);
+    videoTexture01.format = THREE.RGBAFormat;
+
+    const videoShaderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        uVideoTexture: { value: videoTexture01 },
+        uKeyColor: { value: new THREE.Color(0x00ff00) }, // Color to make transparent
+        uThreshold: { value: 0.8 } // Adjust for better transparency
+      },
+      vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+      fragmentShader: `uniform sampler2D uVideoTexture; uniform vec3 uKeyColor; uniform float uThreshold; varying vec2 vUv; void main() { vec4 videoColor = texture2D(uVideoTexture, vUv); float diff = distance(videoColor.rgb, uKeyColor); if (diff < uThreshold) { discard; } gl_FragColor = videoColor; }`,
+      transparent: true
+    });
+    // create a mindar object using threejs
+    const mindarThree = new MindARThree({
+      container: document.querySelector("#container"),
+      imageTargetSrc: "./targets.mind"
+    });
+
+    // setup the scene in threejs
+    const { renderer, scene, camera } = mindarThree;
+    let anchor = mindarThree.addAnchor(0);
+    anchor.onTargetFound = function () {
+      console.log("found");
+      document.getElementById("video01").muted = false;
+    }
+    anchor.onTargetLost = function () {
+      console.log("lost");
+      document.getElementById("video01").muted = true;
+    }
+    const geometry = new THREE.PlaneGeometry(1, 0.55);
+    //const material = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1.0, map: videoTexture01 });
+    const plane = new THREE.Mesh(geometry, videoShaderMaterial);
+    anchor.group.add(plane);
+    const start = async () => {
+      await mindarThree.start();
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
+      });
+    }
+    const startButton = document.querySelector("#startButton");
+    startButton.addEventListener("click", () => {
+      start();
+      document.getElementById("video01").play();
+
+    });
+    stopButton.addEventListener("click", () => {
+      mindarThree.stop();
+      mindarThree.renderer.setAnimationLoop(null);
+    });
+  </script>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #control {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <video id="video01" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/rotation.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+  <div id="control">
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+  </div>
+  <div id="container">
+  </div>
+</body>
+
+</html>

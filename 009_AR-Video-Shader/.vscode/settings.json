@@ -1,0 +1,9 @@
+{
+    "liveServer.settings.root": "/",
+    "liveServer.settings.https": {
+      "enable": true,
+      "cert": "/Users/stc/Documents/Git/semantic-vision/009_AR-Video-Shader/localhost.pem",
+      "key": "/Users/stc/Documents/Git/semantic-vision/009_AR-Video-Shader/localhost.key",
+      "passphrase": "baba"
+    }
+  }
