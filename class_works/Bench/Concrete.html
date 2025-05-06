@@ -1,0 +1,286 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts: Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@v0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.160.0/examples/jsm/",
+        "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { MindARThree } from 'mindar-image-three';
+
+    const video01 = document.getElementById('video01');
+    const button1 = document.getElementById("button1");
+    const button2 = document.getElementById("button2");
+    const infoFrame = document.getElementById("info-frame");
+    const infoButton = document.getElementById("info-button");
+
+    const videoTexture01 = new THREE.VideoTexture(video01);
+    videoTexture01.format = THREE.RGBAFormat;
+
+    const videoShaderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        uVideoTexture: { value: videoTexture01 },
+        uKeyColor: { value: new THREE.Color(0xFF00FF) },
+        uThreshold: { value: 0.8 }
+      },
+      vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+      fragmentShader: `uniform sampler2D uVideoTexture; uniform vec3 uKeyColor; uniform float uThreshold; varying vec2 vUv; void main() { vec4 videoColor = texture2D(uVideoTexture, vUv); float diff = distance(videoColor.rgb, uKeyColor); if (diff < uThreshold) { discard; } gl_FragColor = videoColor; }`,
+      transparent: true
+    });
+
+    const mindarThree = new MindARThree({
+      container: document.querySelector("#container"),
+      imageTargetSrc: "./Concrete_targets.mind"
+    });
+
+    const { renderer, scene, camera } = mindarThree;
+    const anchor = mindarThree.addAnchor(0);
+
+    const frameTexture = new THREE.TextureLoader().load("./assets/Frame 1.png");
+    const frameMaterial = new THREE.MeshBasicMaterial({ map: frameTexture, transparent: true });
+    const framePlane = new THREE.Mesh(new THREE.PlaneGeometry(3, 3.75), frameMaterial);
+    framePlane.position.set(0, 3, 0);
+    anchor.group.add(framePlane);
+
+    const videoPlane = new THREE.Mesh(new THREE.PlaneGeometry(3, 3.75), videoShaderMaterial);
+    videoPlane.position.set(0, 3, 0);
+    videoPlane.visible = false;
+    anchor.group.add(videoPlane);
+
+    anchor.onTargetFound = () => {
+      console.log("Marker Found");
+      framePlane.visible = true;
+      videoPlane.visible = false;
+      button1.style.display = "block";
+      button2.style.display = "none";
+      video01.muted = false;
+      infoFrame.style.display = "none";
+    };
+
+    anchor.onTargetLost = () => {
+      console.log("Marker Lost");
+      framePlane.visible = false;
+      videoPlane.visible = false;
+      button1.style.display = "none";
+      button2.style.display = "none";
+      video01.muted = true;
+      infoFrame.style.display = "block";
+    };
+
+    button1.addEventListener("click", () => {
+      framePlane.visible = false;
+      videoPlane.visible = true;
+      video01.play();
+      button1.style.display = "none";
+      button2.style.display = "block";
+    });
+
+    button2.addEventListener("click", () => {
+      window.location.href = "https://wwf.hu/en/donate/";
+    });
+
+    infoButton.addEventListener("click", () => {
+      infoFrame.style.display = "none";
+      const stream = mindarThree.video.srcObject;
+      if (stream) {
+        stream.getTracks().forEach(track => track.enabled = true);
+      }
+    });
+
+    const start = async () => {
+      await mindarThree.start();
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
+        framePlane.lookAt(camera.position);
+        videoPlane.lookAt(camera.position);
+      });
+    };
+    start();
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    #container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ar-button {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+      height: 56px;
+      background: rgba(1, 44, 15, 0.5);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      outline-offset: 4px;
+      font-size: 1.25rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      color: rgb(255, 255, 255);
+      overflow: hidden;
+      box-shadow: none;
+      z-index: 3;
+      display: none;
+    }
+
+    .ar-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(95deg, #3DFF7B -10.18%, #03C4FF 152.2%);
+      border-radius: 12px;
+      box-shadow: 0 6px hsl(162, 98%, 22%);
+      transform: translateY(-6px);
+      transition: all 0.1s ease;
+      z-index: -1;
+    }
+
+    .ar-button:active::before {
+      transform: translateY(-2px);
+      box-shadow: 0 2px hsl(162, 98%, 22%);
+    }
+
+    .ar-button .front {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      line-height: 56px;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    #button1, #button2 {
+      bottom: 100px;
+    }
+
+    #info-frame {
+      display: none;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      padding: 16px;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%),
+                  linear-gradient(220deg, rgba(255, 7, 139, 0.25) 5.18%, rgba(38, 42, 250, 0.25) 52.1%, rgba(18, 250, 173, 0.25) 87.89%);
+      background-size: 400% 400%;
+      animation: moveGradient 5s ease infinite;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(12.5px);
+      -webkit-backdrop-filter: blur(12.5px);
+      border-radius: 16px;
+      z-index: 3;
+      text-align: center;
+      color: white;
+    }
+
+    @keyframes moveGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #info-frame h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    #info-frame p {
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+
+    #info-button {
+      position: relative;
+      width: 240px;
+      height: 56px;
+      background: rgba(1, 44, 15, 0.5);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      outline-offset: 4px;
+      font-size: 1.25rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      color: rgb(255, 255, 255);
+      overflow: hidden;
+      box-shadow: none;
+    }
+
+    #info-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(95deg, #3DFF7B -10.18%, #03C4FF 152.2%);
+      border-radius: 12px;
+      box-shadow: 0 6px hsl(162, 98%, 22%);
+      transform: translateY(-6px);
+      transition: all 0.1s ease;
+      z-index: -1;
+    }
+
+    #info-button:active::before {
+      transform: translateY(-2px);
+      box-shadow: 0 2px hsl(162, 98%, 22%);
+    }
+  </style>
+</head>
+
+<body>
+  <video id="video01" loop crossOrigin="anonymous" playsinline style="display:none">
+    <source src="./assets/Concrete_video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+  </video>
+
+  <div id="container"></div>
+
+  <button id="button1" class="ar-button">
+    <span class="front">Scan object</span>
+  </button>
+  <button id="button2" class="ar-button">
+    <span class="front">Donate</span>
+  </button>
+
+  <div id="info-frame">
+    <h1>Have you ever wondered what it takes to create objects around you?</h1>
+    <p>
+      This AR experience reveals hidden environmental cost of everyday items, from water and wood to energy and carbon emissions.<br><br>
+      Simply scan to uncover how much nature was used to bring each object to life. Sustainability starts with seeing clearly.
+    </p>
+    <button id="info-button">Scan object</button>
+  </div>
+</body>
+</html>

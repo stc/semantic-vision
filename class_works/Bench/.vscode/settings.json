@@ -1,0 +1,9 @@
+{
+  "liveServer.settings.root": "/",
+  "liveServer.settings.https": {
+    "enable": true,
+    "cert":"C:\\Users\\aizat\\Desktop\\Test01\\Computer Vision\\localhost.pem",
+    "key": "C:\\Users\\aizat\\Desktop\\Test01\\Computer Vision\\localhost.key",
+    "passphrase": "baba"
+  }
+}
