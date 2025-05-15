@@ -50,11 +50,11 @@
     const frameTexture = new THREE.TextureLoader().load("./assets/Frame 1.png");
     const frameMaterial = new THREE.MeshBasicMaterial({ map: frameTexture, transparent: true });
     const framePlane = new THREE.Mesh(new THREE.PlaneGeometry(3, 3.75), frameMaterial);
-    framePlane.position.set(0, 3, 0);
+    framePlane.position.set(0, 0, 0);
     anchor.group.add(framePlane);
 
     const videoPlane = new THREE.Mesh(new THREE.PlaneGeometry(3, 3.75), videoShaderMaterial);
-    videoPlane.position.set(0, 3, 0);
+    videoPlane.position.set(0, 0, 0);
     videoPlane.visible = false;
     anchor.group.add(videoPlane);
 
@@ -150,7 +150,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(95deg, #3DFF7B -10.18%, #03C4FF 152.2%);
+      background: linear-gradient(95deg, #019443 -10.18%, #427A7F 152.2%);
       border-radius: 12px;
       box-shadow: 0 6px hsl(162, 98%, 22%);
       transform: translateY(-6px);
@@ -180,24 +180,21 @@
     }
 
     #info-frame {
-      display: none;
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 300px;
-      padding: 16px;
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%),
-                  linear-gradient(220deg, rgba(255, 7, 139, 0.25) 5.18%, rgba(38, 42, 250, 0.25) 52.1%, rgba(18, 250, 173, 0.25) 87.89%);
-      background-size: 400% 400%;
-      animation: moveGradient 5s ease infinite;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      backdrop-filter: blur(12.5px);
-      -webkit-backdrop-filter: blur(12.5px);
-      border-radius: 16px;
-      z-index: 3;
-      text-align: center;
-      color: white;
+  display: none;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  padding: 16px;
+  background-color: rgba(8, 17, 18, 0.85); /* Solid color with transparency */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
+  border-radius: 16px;
+  z-index: 3;
+  text-align: center;
+  color: #427A7F;
     }
 
     @keyframes moveGradient {
@@ -211,6 +208,7 @@
       font-weight: 700;
       font-size: 24px;
       margin-bottom: 12px;
+      color: #60a7ae
     }
 
     #info-frame p {
@@ -219,6 +217,7 @@
       font-weight: 400;
       line-height: 1.6;
       margin-bottom: 48px;
+      color: #60a7ae
     }
 
     #info-button {
